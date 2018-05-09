@@ -1,6 +1,6 @@
 /*
  * Author: Josue Galeas
- * Last Edit: 2018.02.07
+ * Last Edit: 2018.05.09
  */
 
 #ifndef NODE_HPP
@@ -9,13 +9,11 @@
 #include "User.hpp"
 #include <vector>
 
-enum Levels {Zero, One, Two};
-
 class Node
 {
 	private:
 		double location[2]; // GPS Location
-		Levels level = Levels::One;
+		int level = 2;
 		std::vector<std::tuple<int, int, int, Node *>> neighbors; // List of neighbors stored as offsets
 		std::vector<User> users; // List of users
 

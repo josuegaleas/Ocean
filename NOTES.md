@@ -1,5 +1,16 @@
 # Ocean
 
+## NEW "COVERAGE" APPROACH
+- Node should have “coverage” list?
+- Coverage would be a list of all cells within its influence (based on level of course)
+- Since it would be based on level, it’s always a fixed number of cells with relative position to the center
+- If a cell is a neighbor, then mark it as a neighbor (perhaps a list of pointers to said neighbors?)
+- Should we differentiate if a neighbor is sharing an edge, a corner, or is overlapping?
+- With this coverage in mind, is it possible to discover dead spots? Especially when shrinking and growing nodes?
+- How would path finding work in this case?
+- Need to find the best way to see if two endpoints are connected, otherwise look up and repeat until a path is built
+- Where would the constructed path be stored? Centralized somewhere or stored in maps along the way?
+
 ## Things To Consider
 - Could abstract higher and make cluster of hubs (and nodes?)
 - Nodes should be able to grow one level in and out
