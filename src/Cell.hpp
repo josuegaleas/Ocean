@@ -6,23 +6,64 @@
 #ifndef CELL_HPP
 #define CELL_HPP
 
+#include <cstdio>
+#include <vector>
+#include "User.hpp"
+
+union Location
+{
+	int relative[3];
+	double absolute[3];
+};
+
 class Cell
 {
 	private:
-		int loc[3];
-		bool node;
+		Location loc;
+		int radius; // -1 is a cell, [0, 4] is a node
+		std::vector<Cell *> cells;
+		std::vector<User *> users;
 
 	public:
-		Cell(int, int, int);
+		Cell(int, Location &);
+		void grow();
 };
 
-Cell::Cell(int x, int y, int z)
+Cell::Cell(int n, Location &l)
 {
-	loc[0] = x;
-	loc[1] = y;
-	loc[2] = z;
+	if (n >= -1 && n <= 4) // Only values in [-1, 4]
+	{
+		if (n == -1) // If just a cell
+		{
+			for (int i = 0; i < 3; i++)
+				loc.relative[i] = 0; // TODO: Should not be zero? Should be the distance from the home nodes
+		}
+		else // If a node
+		{
+			for (int i = 0; i < 3; i++)
+				loc.absolute[i] = l.absolute[i];
+		}
 
-	node = false; // FIXME: Do we really need this?
+		radius = n;
+	}
+	else
+	{
+		// Handle this as bizarre behavior
+		return;
+	}
+
+
+	// TODO: cells vector will be using for neighbors/homes
+	// TODO: users vector will contain users within a cell
+}
+
+void Cell::grow()
+{
+	if (radius < 4)
+	{
+		printf("ERROR: Node cannot be larger than four.");
+		return;
+	}
 }
 
 #endif /* CELL_HPP */
