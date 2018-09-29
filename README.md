@@ -1,4 +1,4 @@
-# Ocean
+# OpenOcean
 A free and open-source solution to managing users in a cell tower network.
 
 # Resources
